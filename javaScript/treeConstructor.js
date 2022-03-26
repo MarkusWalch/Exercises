@@ -18,7 +18,7 @@ function TreeConstructor(strArr) {
     tree.add(16);
 
     console.log(tree.getMax(tree.root.left));
-    //tree.pop(10);
+    tree.pop(10);
     console.log(tree.getMax());
     console.log(tree.getMin(tree.root.right));
     console.log(tree.getMin());
@@ -64,7 +64,6 @@ depth => root node = 0, leaf = steps from root to leaf
         value < node.value ? node.left = new BinaryNode(value, node) : node.right = new BinaryNode(value, node);
     }
 
-    //Here is a problem with find
     find(value) {
         if (this.root.value == value) {
             return this.root;
@@ -102,7 +101,7 @@ depth => root node = 0, leaf = steps from root to leaf
             //Need to replace the child with the closest value either higher or lower
             //closest higher value = take first right child from note, then always left
             result = node.value;
-            node.value = this.pop(node.right.value);
+            node.value = this.pop(this.getMin(node.right));
         }
 
         //1 child node
@@ -152,6 +151,7 @@ depth => root node = 0, leaf = steps from root to leaf
             return true;
     }
 
+    //helper function found online
     combineLeftIntoRightSubtree(node) {
         if (node.right) {
           const leftmost = this.getLeftmost(node.right);
@@ -197,6 +197,7 @@ class BinaryNode {    //Binary Tree
         this.#parent = parent;
     }
 
+    //No check if I override an old value
     get left() {
         return this.#left;
     }
@@ -204,18 +205,12 @@ class BinaryNode {    //Binary Tree
     //Otherwise with this.left = node; you would make an infinite loop
     set left(node) {
         this.#left = node;
-//        if (node) {
-//            node.parent = this;
-//          }
     }
     get right() {
         return this.#right;
     }
     set right(node) {
         this.#right = node;
-//        if (node) {
-//            node.parent = this;
-//          }
     }
 
     get parent() {
@@ -224,19 +219,6 @@ class BinaryNode {    //Binary Tree
 
     set parent(node) {
         this.#parent = node;
-/*
-        if (node) {
-            if (node.left == null) {
-                node.left = this;
-            }
-            else if (node.right == null) {
-                node.right = this;
-            }
-            else {
-                console.log("Die Node " + node.value + " hat schon 2 children!");
-            }
-        }
-*/
     }
 }
 
