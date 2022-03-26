@@ -23,10 +23,30 @@ function TreeConstructor(strArr) {
     console.log(tree.getMin(tree.root.right));
     console.log(tree.getMin());
     
-    
+    console.log("TraverseInOrder: left, parent, right");
+    const inOrder = tree.traverseInOrder();
+    let x;
+    while (x = inOrder.next().value) {
+        console.log(x);
+    }
 
+    console.log("TraverseReverseOrder: right, parent, left");
+    const reverseOrder = tree.traverseReverseOrder();
+    while (x = reverseOrder.next().value) {
+        console.log(x);
+    }
 
-    return false;
+    console.log("TraversePostOrder: left, right, parent");
+    const postOrder = tree.traversePostOrder();
+    while (x = postOrder.next().value) {
+        console.log(x);
+    }
+
+    console.log("TraversePreOrder: parent, left, right");
+    const preOrder = tree.traversePreOrder();
+    while (x = preOrder.next().value) {
+        console.log(x);
+    }
 }
 
 class BinSearchTree {
@@ -41,6 +61,7 @@ depth => root node = 0, leaf = steps from root to leaf
         this.root = null;
         this.size = 0;
     }
+
     add(value) {
         //Insert root node
         if (this.root == null) {
@@ -124,42 +145,7 @@ depth => root node = 0, leaf = steps from root to leaf
             node = null;           
         }
         return result;
-    }
-
-    //Function found online with helper function
-    remove2(value) {
-            const nodeToRemove = this.find(value);
-            if (!nodeToRemove) return false;
-          
-            // Combine left and right children into one subtree without nodeToRemove
-            const nodeToRemoveChildren = this.combineLeftIntoRightSubtree(nodeToRemove);
-          
-            if (nodeToRemove.meta.multiplicity && nodeToRemove.meta.multiplicity > 1) {
-              nodeToRemove.meta.multiplicity -= 1; // handle duplicated
-            } else if (nodeToRemove === this.root) {
-              // Replace (root) node to delete with the combined subtree.
-              this.root = nodeToRemoveChildren;
-              this.root.parent = null; // clearing up old parent
-            } else {
-              const side = nodeToRemove.isParentLeftChild ? 'left' : 'right';
-              const { parent } = nodeToRemove; // get parent
-              // Replace node to delete with the combined subtree.
-              parent[side] = nodeToRemoveChildren;
-            }
-          
-            this.size -= 1;
-            return true;
-    }
-
-    //helper function found online
-    combineLeftIntoRightSubtree(node) {
-        if (node.right) {
-          const leftmost = this.getLeftmost(node.right);
-          leftmost.left = node.left;
-          return node.right;
-        }
-        return node.left;
-      }      
+    }    
 
     getMax(node = this.root) {
         while (node.right) {
@@ -167,6 +153,7 @@ depth => root node = 0, leaf = steps from root to leaf
         }
         return node.value;
     }
+
     getMin(node = this.root) {
         while (node.left) {
             node = node.left;
@@ -182,7 +169,33 @@ depth => root node = 0, leaf = steps from root to leaf
             return node.right;
         }
     }
+
+    //generator-function - my first try
+    * traverseInOrder(node = this.root) {
+        if (node.left) { yield* this.traverseInOrder(node.left); }
+        yield node;
+        if (node.right) { yield* this.traverseInOrder(node.right); }
+    }
+
+    * traverseReverseOrder(node = this.root) {
+        if (node.right) { yield* this.traverseReverseOrder(node.right); }
+        yield node;
+        if (node.left) { yield* this.traverseReverseOrder(node.left); }
+    } 
+
+    * traversePostOrder(node = this.root) {
+    if (node.left) { yield* this.traversePostOrder(node.left); }
+    if (node.right) { yield* this.traversePostOrder(node.right); }
+    yield node;
+    } 
+
+    * traversePreOrder(node = this.root) {
+        yield node;
+        if (node.left) { yield* this.traversePreOrder(node.left); }
+        if (node.right) { yield* this.traversePreOrder(node.right); }
+    }
 }
+
 class BinaryNode {    //Binary Tree
     // Das # bedeutet private deklariert
     // Private können nur am Anfang deklariert werden
@@ -212,11 +225,9 @@ class BinaryNode {    //Binary Tree
     set right(node) {
         this.#right = node;
     }
-
     get parent() {
         return this.#parent;
     }
-
     set parent(node) {
         this.#parent = node;
     }
