@@ -1,8 +1,11 @@
 "use strict";
+import { Queue } from "./queue.mjs";
 
 function TreeConstructor(strArr) {
+    
+    let queue = new Queue();
+    queue.enqueue(12);
 
-    //Extra erstellen ist sinnlos, mache ich halt :)
     let tree = new BinSearchTree();
 
     tree.add(5);
@@ -47,9 +50,15 @@ function TreeConstructor(strArr) {
     while (x = preOrder.next().value) {
         console.log(x);
     }
+
+    console.log("BFS - Each depth finished, then next one - a queue is needed");
+    const bfs = tree.bfs();
+    while (x = bfs.next().value) {
+        console.log(x);
+    }
 }
 
-class BinSearchTree {
+export class BinSearchTree {
 /*Properties of a tree
 Top-most-node = root
 node with no children = leaf/terminal node
@@ -194,9 +203,26 @@ depth => root node = 0, leaf = steps from root to leaf
         if (node.left) { yield* this.traversePreOrder(node.left); }
         if (node.right) { yield* this.traversePreOrder(node.right); }
     }
+
+    * bfs() {
+        const queue = new Queue();
+
+        queue.enqueue(this.root);
+
+        while (!queue.isEmpty()) {
+            const node = queue.dequeue();
+            yield node;
+            if (node.left) {
+                queue.enqueue(node.left);
+            }
+            if (node.right) {
+                queue.enqueue(node.right);
+            }
+        }
+    }
 }
 
-class BinaryNode {    //Binary Tree
+export class BinaryNode {    //Binary Tree
     // Das # bedeutet private deklariert
     // Private können nur am Anfang deklariert werden
     #left;
@@ -233,5 +259,5 @@ class BinaryNode {    //Binary Tree
     }
 }
 
-// keep this function call here 
-console.log(TreeConstructor(["(1,2)", "(2,4)", "(7,2)"]));
+//keep this function call here 
+//console.log(TreeConstructor(["(1,2)", "(2,4)", "(7,2)"]));
