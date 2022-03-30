@@ -35,7 +35,8 @@ class PriorityQueueArr extends Queue {
     constructor() {
         super();
     }
-
+    
+    /** @param {number} intPriority Higher Value means higher Priority */
     enqueue(anyElement, intPriority) {
         let item = {
             element:anyElement, priority:intPriority
@@ -43,6 +44,9 @@ class PriorityQueueArr extends Queue {
 
         this.size = this.elements.push(item);
     }
+    /*
+    * @returns {object} element with highest priority. 
+    */
     dequeue() {
         let index = this.highestPriorityIndex();
         //splice return an array, I found no other way to remove an element in the middle
@@ -96,6 +100,7 @@ function test () {
     console.log(row.dequeue());
     console.log(row);
 }
+
 
 //test();
 

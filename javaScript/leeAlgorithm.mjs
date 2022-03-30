@@ -1,5 +1,5 @@
 import { Queue } from "./queue.mjs";
-import { BinSearchTree, BinaryNode } from "./treeConstructor.mjs";
+import { BinSearchTree, BinaryNode } from "./binarytreeConstructor.mjs";
 
 console.log("Start with a game called FatCat:)");
 
@@ -39,31 +39,24 @@ while (!nextFields.isEmpty()) {
     //Try all 4 directions
     place.x++;
     if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") {
-            direction = "Right";
-        }
+        //Good way to safe space and brackets
+        if (place.direction === "zero") direction = "Right";
         nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
     }
     place.x -= 2;
     if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") {
-            direction = "Left";
-        }
+        if (place.direction === "zero") direction = "Left";
         nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
     }
     place.x++;
     place.y++;
     if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") {
-            direction = "Oben";
-        }
+        if (place.direction === "zero") direction = "Oben";
         nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
     }
     place.y -= 2;
     if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") {
-            direction = "Unten";
-        }
+        if (place.direction === "zero") direction = "Unten";
         nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
     }
 }
@@ -160,6 +153,7 @@ function fillLab(labArr) {
             }
             if (i === 8 && j === 19) {
                 zeile += "C";
+                continue;
             }
             labArr[i][j] == true ? zeile += "X" : zeile += " ";
         }

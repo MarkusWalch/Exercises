@@ -58,7 +58,7 @@ function TreeConstructor(strArr) {
     }
 }
 
-export class BinSearchTree {
+class BinSearchTree {
 /*Properties of a tree
 Top-most-node = root
 node with no children = leaf/terminal node
@@ -222,7 +222,8 @@ depth => root node = 0, leaf = steps from root to leaf
     }
 }
 
-export class BinaryNode {    //Binary Tree
+/** @class {BinaryNode} A node with left,right and parent properties */  
+class BinaryNode {    //Binary Tree
     // Das # bedeutet private deklariert
     // Private können nur am Anfang deklariert werden
     #left;
@@ -261,3 +262,6 @@ export class BinaryNode {    //Binary Tree
 
 //keep this function call here 
 //console.log(TreeConstructor(["(1,2)", "(2,4)", "(7,2)"]));
+
+export { BinaryNode };
+export { BinSearchTree };
