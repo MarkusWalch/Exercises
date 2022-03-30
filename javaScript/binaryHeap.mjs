@@ -10,7 +10,6 @@ class BinaryMinHeap {
     constructor(selector) {
         this.nodes = [];
         this.nodes.push(null);
-        this.selector = selector;
     }
 
     /** @description Inserts an element at the end of the Array. */
@@ -63,7 +62,7 @@ class BinaryMinHeap {
     peek() {
         return (this.isEmpty() ? null : this.nodes[1]);
     }
-    
+
     /** @param {integer} index1 first element to swap */
     /** @param {integer} index2 second element to swap */
     swap(index1, index2) {
