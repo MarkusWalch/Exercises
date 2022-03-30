@@ -95,7 +95,7 @@ function test() {
     let a = 10;
 }
 
-test();
+//test();
 
 export { BinaryMinHeap };
 
