@@ -17,6 +17,19 @@ function Field(x, y, direction, distance) {
     this.distance = distance;
 }
 
+class Direction {
+    static Left = new Direction(-1, 0, "left");
+    static Right = new Direction(1, 0, "right");
+    static Top = new Direction(0, 1, "top");
+    static Down = new Direction(0, -1, "down");
+
+    constructor(x, y, name) {
+        this.x = x;
+        this.y = y;
+        this.name = name;
+    }
+}
+
 let nextFields = new Queue();
 
 //Create lab
@@ -28,6 +41,7 @@ nextFields.enqueue(new Field(8, 19, "zero", 0));
 
 while (!nextFields.isEmpty()) {
     let place = nextFields.dequeue();
+    let potentPlace;
     let direction = place.direction;
     discovered[place.x][place.y] = true;
     //Is mouse here
@@ -36,31 +50,16 @@ while (!nextFields.isEmpty()) {
         break;
     }
 
-    //Try all 4 directions
-    place.x++;
-    if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        //Good way to safe space and brackets
-        if (place.direction === "zero") direction = "Right";
-        nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
-    }
-    place.x -= 2;
-    if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") direction = "Left";
-        nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
-    }
-    place.x++;
-    place.y++;
-    if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") direction = "Oben";
-        nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
-    }
-    place.y -= 2;
-    if (lab[place.x][place.y] != true && discovered[place.x][place.y] != true) {
-        if (place.direction === "zero") direction = "Unten";
-        nextFields.enqueue(new Field(place.x, place.y, direction, place.distance + 1));
+    //dir is only the index, so use Direction[dir] instead of dir
+    for(let dir in Direction) {
+        potentPlace = new Field(place.x + Direction[dir].x, place.y + Direction[dir].y, place.direction, place.distance + 1);
+        if (lab[potentPlace.x][potentPlace.y] != true && discovered[potentPlace.x][potentPlace.y] != true) {
+            //Good way to safe space and brackets
+            if (potentPlace.direction === "zero") potentPlace.direction = dir;
+            nextFields.enqueue(potentPlace);
+        }
     }
 }
-
 
 let a = 10;
 

@@ -1,13 +1,11 @@
 "use strict";
 
-import { BinaryNode } from "./binarytreeConstructor.mjs";
-
-/** @class {BinaryHeap} Ein BinaryMinHeap auf Array Basis */
+/** @class {BinaryMinHeap} Ein BinaryMinHeap auf Array Basis */
 /** @param {size} size Number of Elements */
 /** @param {nodes} nodes All elements, index 0 is empty => null value */
 
 class BinaryMinHeap {
-    constructor(selector) {
+    constructor() {
         this.nodes = [];
         this.nodes.push(null);
     }
@@ -16,13 +14,15 @@ class BinaryMinHeap {
     insert(element) {
         let index = this.nodes.length;
         this.nodes.push(element);
+        if (index === 1) return;
 
         let parentIndex = Math.floor(index / 2);
 
-        while (this.nodes[index] < this.nodes[parentIndex]) {
+        while (this.compare(this.nodes[index], this.nodes[parentIndex])) {
             this.swap(index, parentIndex);
             index = parentIndex;
             parentIndex = Math.floor(index / 2);
+            if (parentIndex === 0) break;
         }
     }
 
@@ -37,8 +37,8 @@ class BinaryMinHeap {
         let child1 = 2;
         let child2 = 3;
     
-        while (this.nodes[index] > this.nodes[child1] || this.nodes[index] > this.nodes[child2]) {
-            if (this.nodes[child1] < this.nodes[child2]) {
+        while (!this.compare(this.nodes[index], this.nodes[child1]) || !this.compare(this.nodes[index], this.nodes[child2])) {
+            if (this.compare(this.nodes[child1], this.nodes[child2])) {
                 this.swap(index, child1)
                 index = child1;
             }
@@ -51,8 +51,7 @@ class BinaryMinHeap {
 
             //Over boundary of array
             if (child2 > this.nodes.length) break;
-        }
-        
+        }        
         return result;
     }
 
@@ -70,10 +69,25 @@ class BinaryMinHeap {
         this.nodes[index1] = this.nodes[index2];
         this.nodes[index2] = temp;
     }
+
+    /** @description Check if first value is smaller */
+    /** @returns true, if value1 is smaller than value2 */
+    compare(value1, value2) {
+        return (value1 < value2)
+    }
 }
 
+class BinaryMaxHeap extends BinaryMinHeap {
+
+    /** @description Check if first value is bigger */
+    /** @returns true, if value1 is bigger than value2 */
+    compare(value1, value2) {
+        return (value1 > value2)
+    }
+} 
+
 function test() {
-    let test = new BinaryMinHeap();
+    let test = new BinaryMaxHeap();
     //10 elements
     test.insert(10);
     test.insert(20);
@@ -92,10 +106,13 @@ function test() {
 
     test.insert(1);
 
+    console.log(test);
+
     let a = 10;
 }
 
 //test();
 
 export { BinaryMinHeap };
+export { BinaryMaxHeap };
 
