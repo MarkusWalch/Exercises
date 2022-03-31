@@ -1,4 +1,6 @@
 "use strict";
+import { BinaryMaxHeap } from "./binaryHeap.mjs"; 
+
 //My notes - be carefull about properties and methodes.
 //Sometimes the Intellisense doesn't get the mistake
 //and I can look for bugs :/
