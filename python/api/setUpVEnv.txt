@@ -1,0 +1,33 @@
+Es gibt 2 Kommandos zum installieren:
+
+1. get-apt = Packetmanager von Linux für alle Pakete.
+Dafür brauchst du manchmal Root-Rechte - sudo
+
+2. pip3 = Installiert Python3 Pakete
+
+
+Zuerst musst du vielleicht python3-venv installieren.
+(sudo) apt-get install python3-venv
+
+
+Dann kreirst du in deinem gewollten directory eine
+virtuelle Umgebung. Alle Infos dafür werden in einem
+neuen directory gespeichert.
+Also, wechsle in dein gewolltes directory.
+
+python3 -m venv (name of new directory)
+Beispiele:
+python3 -m venv .venv (hidden directory)
+python3 -m venv my-project-env
+
+Danach muss es aktiviert werden, jedes Mal wenn du
+eine Konsole neu öffnest.
+Das geht so (in deinem directory):
+source my-project-env/bin/activate
+Der genaue Pfadname kann sich natürlich ändern.
+
+Jetzt merkst du, dass du die virtuelle Umgebung aktiviert hast.
+Jetzt kannst du installieren was du willst,
+sobald du die venv wieder deaktivierst oder löscht,
+sind auch die Einstellungen gelöscht.
+

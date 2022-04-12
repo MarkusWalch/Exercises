@@ -5,11 +5,17 @@ import requests
 #python3 consume_api.py in the command-line works
 #python consume_api.py does NOT!
 
-response = requests.get("https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow")
+#Comment python
+#indenting is IMPORTANT, no bracket, no semikolon
 
-print(response.json()["items"])
-#Weiter gehts morgen :)
+response = requests.get("https://api.stackexchange.com"+
+"/2.3/questions?order=desc&sort=activity&site=stackoverflow")
 
-#for data in response.json()["items"]:
-#    print(data["title"])
-
+for data in response.json()["items"]:
+    if data["answer_count"] == 0:
+        print(data["title"])
+        print(data["link"])
+        print()
+    else:
+        print("skipped")
+        print()
