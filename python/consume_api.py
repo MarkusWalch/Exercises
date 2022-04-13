@@ -11,6 +11,8 @@ import requests
 response = requests.get("https://api.stackexchange.com"+
 "/2.3/questions?order=desc&sort=activity&site=stackoverflow")
 
+#Weiter Gehts
+
 for data in response.json()["items"]:
     if data["answer_count"] == 0:
         print(data["title"])
