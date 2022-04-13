@@ -33,12 +33,13 @@ class Queue {
     }
 }
 
-class PriorityQueueArr extends Queue {
+/** @class Priority Queue on an Array basis, higher priority number means higher priority */
+class PriorityQueueHigh extends Queue {
     constructor() {
         super();
     }
     
-    /** @param {number} intPriority Higher Value means higher Priority */
+    /** @param {number} intPriority Sets the priority of the object */
     enqueue(anyElement, intPriority) {
         let item = {
             element:anyElement, priority:intPriority
@@ -47,31 +48,63 @@ class PriorityQueueArr extends Queue {
         this.size = this.elements.push(item);
     }
     /*
-    * @returns {object} element with highest priority. 
+    * @returns {object} element with highest priority + priority. 
     */
     dequeue() {
         let index = this.highestPriorityIndex();
         //splice return an array, I found no other way to remove an element in the middle
         let result = this.elements.splice(index, 1)[0];
         result ? this.size-- : this.size = 0;
-        return result.element;
+        return result;
     }
     peek() {
-        return this.elements[this.highestPriorityIndex()].element;
+        return this.elements[this.highestPriorityIndex()];
+    }
+
+    /**@returns {number} index of the found element, if not found -1 */
+    /**@description sets the priority of the first found element with this name. Works not with Objects inside.  */
+    setpriority(element, priorityNew) {
+        let index = this.elements.findIndex(x => x.element == element);
+        if (index === -1) return index
+        this.elements[index].priority = priorityNew;
+        return index
+    }
+
+    /**@returns {object} object with element and priority properties. Undefined if not found. */
+    findElement(element) {
+        return this.elements.find(x => x.element === element);
     }
 
     highestPriorityIndex() {
         let highestPriorityIndex = 0;
-        let highestPriority = 0;
+        let highestPriority = this.elements[0].priority;
         for (let index in this.elements) {
-            if (this.elements[index].priority > highestPriority) {
+            if (this.hasHigherPriority(this.elements[index].priority, highestPriority)) {
                 highestPriority = this.elements[index].priority;
                 highestPriorityIndex = index;
             }
         }
         return highestPriorityIndex;
     }
+
+    /** @description Check if value1 has higher priority  */
+    /** @returns true, if value1 has a higher number than value2 */
+    hasHigherPriority(element1, element2) {
+        return (element1 > element2);
+    }
 }
+
+/** @class Priority Queue on an Array basis, lower priority number means higher priority */
+class PriorityQueueLow extends PriorityQueueHigh {
+
+    /** @description Check if value1 has higher priority  */
+    /** @returns true, if value1 has a lower number than value2 */
+    hasHigherPriority(element1, element2) {
+        return (element1 < element2);
+    }
+}
+
+
 
 function test () {
     let snake = new Queue();
@@ -92,7 +125,7 @@ function test () {
 
     //No overloading methods with parameters in js
     console.log("Priority Queue");
-    let row = new PriorityQueueArr();
+    let row = new PriorityQueueLow();
     row.enqueue("Me", 10);
     console.log(row.size);
     row.enqueue("Her", 20);
@@ -107,4 +140,5 @@ function test () {
 //test();
 
 export { Queue };
-export { PriorityQueueArr };
+export { PriorityQueueHigh };
+export { PriorityQueueLow };
