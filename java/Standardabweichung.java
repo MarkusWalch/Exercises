@@ -20,6 +20,7 @@ public class Standardabweichung {
     //Wurzel[(1/(n-1))*Summe{i=1,bis n}((xi - mittel)^2)]
     //mittel = arithmetische Mittel der Werte
     //Es gibt mehrere Arten der Standardabweichung, hab halt eine genommen.
+    //Kann gerne auch wechseln
     public static double standardabweichung(double[] values) {
         double result = 0.0;
         double mittelwert = 0.0;
