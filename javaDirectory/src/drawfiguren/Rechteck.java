@@ -1,3 +1,5 @@
+package drawfiguren;
+
 import java.awt.Graphics;
 
 public class Rechteck extends Figur {
@@ -22,6 +24,9 @@ public class Rechteck extends Figur {
     }
 
     public static void main(String[] args) {
+        System.out.println("Figur : " + Figur.class.getClassLoader());
+        System.out.println("Ellipse : " + Ellipse.class.getClassLoader());
+        System.out.println("Rechteck : " + Rechteck.class.getClassLoader());
         Rechteck react = new Rechteck(100, 100, 200, 50);
         System.out.println(react);
     }

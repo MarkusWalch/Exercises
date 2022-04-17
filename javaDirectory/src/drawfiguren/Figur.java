@@ -1,3 +1,5 @@
+package drawfiguren;
+
 import java.awt.Graphics;
 
 public abstract class Figur {

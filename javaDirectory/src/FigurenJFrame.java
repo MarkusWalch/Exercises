@@ -1,4 +1,9 @@
 import javax.swing.JFrame;
+
+import drawfiguren.Ellipse;
+import drawfiguren.Figur;
+import drawfiguren.Rechteck;
+
 import java.awt.Graphics;
 import java.util.Scanner;
 
@@ -27,10 +32,14 @@ public class FigurenJFrame extends JFrame {
     }
 
     public static void main(String[] args) {
+        //java.util.ResourceBundle.clearCache();
         var f = new FigurenJFrame();
         //Damit er nicht gleich schließt
         //Vielleicht finde ich mal elegantere Lösung
         System.out.println(new Rechteck(100, 100, 50, 50).toString());
+        System.out.println("Figur : " + Figur.class.getClassLoader());
+        System.out.println("Ellipse : " + Ellipse.class.getClassLoader());
+        System.out.println("Rechteck : " + Rechteck.class.getClassLoader());
         Scanner sc = new Scanner(System.in);
         sc.next();
         sc.close();

@@ -1,0 +1,48 @@
+Java-Files müssen IMMER gleich heißen wie die Klasse,
+also auch Großbuchstaben in den Filenamen.
+
+Nicht vergessen bei Änderungen im Code und debuggen,
+SPEICHERN!!! - Strg + S
+
+Klassen im selben Package müssen nicht importiert werden.
+
+
+Kompilieren:
+javac Dateiname.java
+    Die Datei wird im selben Ordner kompiliert - *.class erstellt.
+
+javac -d classes/ src/asb/xyz/dateiname.java
+    -d <Pfad> = "destination" - dort wird die .class File abgelegt.
+    Der zweite Teil ist wieder die zu kompilierende Datei.
+
+javac -cp classes/;xyz -d classes/ src/asb/xyz/dateiname.java
+    Der hintere Teil ist gleich wie oben.
+    -cp <Pfad1;Pfad2;...> meint hier "classpath" und zeigt mir an,
+    wo der Kompiler .class Files findet. Das ist manchmal nötig,
+    falls ich beim Kompilieren schon .class Files brauche.
+
+Es gibt auch eine Standard Classpath Variable, vielleicht setze ich die mal.
+
+
+Ausführen:
+(java Dateiname.java)
+java Dateiname.class
+    Normalerweise nur kompilierte, also .class Files ausführbar.
+    Bei Debuggen geht es vielleicht auch so.
+
+java -cp classes packagename.underpackagename.classname
+    -cp <Pfad> = "classpath" - zeigt an wo die .class Files zu
+    finden sind, falls sie nicht im selben Ordner sind.
+    Hier wird nicht die .java Datei, sondern die Klasse ausgeführt.
+    .java File würde hier nicht funktionieren.
+
+
+Eventuelle Codezeilen für Fehler:
+
+System.out.println(Classname.class.getClassLoader());
+    Gibt den verwendeten Classloader für die jeweilige Klasse aus.
+
+java.util.ResourceBundle.clearCache();
+    Löscht den Cache von den ClassLoadern.
+    Falls eine andere Version einer Klasse im Memory-Bereich
+    steckt.

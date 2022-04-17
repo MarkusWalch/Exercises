@@ -1,3 +1,5 @@
+package drawfiguren;
+
 import java.awt.Graphics;
 
 public class Ellipse extends Figur {
@@ -22,7 +24,11 @@ public class Ellipse extends Figur {
     }
 
     public static void main(String[] args) {
+        System.out.println("Figur : " + Figur.class.getClassLoader());
+        System.out.println("Ellipse : " + Ellipse.class.getClassLoader());
+        System.out.println("Rechteck : " + Rechteck.class.getClassLoader());
         Ellipse ellipse = new Ellipse(100, 200, 50, 300);
         System.out.println(ellipse);
+
     }
 }
