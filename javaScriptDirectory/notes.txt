@@ -1,0 +1,68 @@
+//Comments für JavaScript:
+
+Starten/Debuggen eines Programmes
+node dateiname.js
+node dateiname.mjs
+
+Semikolon gehört zum guten Stil, ist aber nicht nötig.
+
+"use strict"
+schreibe diesen String an den Anfang, dann wird der Code 
+in Strict-mode ausgeführt, ist dann ähnlicher wie in C#.
+
+Use function/Class-Comments!
+/** @param {nodes} nodes All elements, index 0 is empty => null value */
+
+Beim Speichern der Datei, verwende .mjs, dann kann es gut exportiert werden.
+Hängt mit meinen Einstellungen zusammen.
+
+No constructor Overloading in JS,
+ein ähnlicher Effekt vielleicht mit default-Parametern.
+
+Variablen mit #myVariable deklarieren => protected.
+
+Variablen generieren mit:
+const pi;          Konstante - nicht mehr änderbar;
+let x;             Nur für den aktuellen Bereich gültig;
+var myVar;         Geht auch, vorherige bevorzugen;
+myVar;             Eine globale Variable, auch in einer Function
+
+Es können auch functions in Variablen gespeichert werden:
+let magic = function();
+
+oder "nameless" functions direkt kreiert werden:
+let magic = function() {
+    let result;
+    ..... do something .....
+    return result;
+}
+
+Bildschirmausgabe:
+console.log(...);
+
+es gibt neben null auch undefined
+
+neben == gibt es auch === als Vergleichs-Operator
+a == "17" (wandelt beide Variablen in den selben Typ und vergleicht dann)
+a === "17" (vergleicht sofort, bei ungleichen Typ kommt false raus)
+a != "4"
+a !== "4"
+
+es gibt i++ und ++i (vorher inkrementieren, dann verwenden)
+
+Objekte werden mit {} und key:value Paaren generiert.
+let myObject = {"father":"Michael",
+"mother": {
+    "name": "Julia",
+    "age": 36,
+    },
+    "siblings":["Thomas", "Anna"]
+    };
+
+let myArray = ["Markus", 1];
+Es gibt Array Functions:
+myArray.push (adds element at the end)
+myArray.pop (removes element at the end)
+myArray.unshift (adds element at the Start)
+myArray.shift (removes elemenent at the Start)
+
